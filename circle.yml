@@ -14,3 +14,4 @@ deployment:
       - gcloud auth activate-service-account --key-file /tmp/google_secret.json
       - docker build -t gcr.io/requiresafe-1087/https-redirect:${CLOUD_TAG##v}
       - gcloud docker push gcr.io/requiresafe-1087/https-redirect
+
