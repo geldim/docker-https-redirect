@@ -1,0 +1,16 @@
+machine:
+  environment:
+    CLOUDSDK_INSTALL_DIR: /home/ubuntu
+    CLOUDSDK_CORE_DISABLE_PROMPTS: 1
+  services:
+    - docker
+deployment:
+  gcr:
+    tag: /v[0-9]+\.[0-9]+\.[0-9]+/
+    commands:
+      - curl https://sdk.cloud.google.com | bash
+      - echo "source '/home/ubuntu/google-cloud-sdk/path.bash.inc'" >> /home/ubuntu/.circlerc
+      - echo $GOOGLE_SECRET_JSON > /tmp/google_secret.json
+      - gcloud auth activate-service-account --key-file /tmp/google_secret.json
+      - docker build -t gcr.io/requiresafe-1087/https-redirect:${CLOUD_TAG##v}
+      - gcloud docker push gcr.io/requiresafe-1087/https-redirect
