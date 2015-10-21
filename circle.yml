@@ -4,6 +4,11 @@ machine:
     CLOUDSDK_CORE_DISABLE_PROMPTS: 1
   services:
     - docker
+
+test:
+  override:
+    - echo "no tests, yo"
+
 deployment:
   gcr:
     tag: /v[0-9]+\.[0-9]+\.[0-9]+/
