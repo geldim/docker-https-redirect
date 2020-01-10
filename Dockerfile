@@ -1,4 +1,5 @@
-FROM alpine:3.10.3
-RUN apk add --no-cache nginx=1.16.1-r1 && mkdir /tmp/nginx && mkdir -p /run/nginx
+FROM alpine
+RUN apk add --no-cache nginx && mkdir /tmp/nginx && mkdir -p /run/nginx
+ADD ./301.html /var/www/localhost/htdocs/301.html
 ADD ./nginx.conf /etc/nginx/nginx.conf
 CMD ["nginx"]
